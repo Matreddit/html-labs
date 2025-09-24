@@ -1,0 +1,77 @@
+body {
+    /* font-family: Arial, sans-serif; */
+    /* font-family: 'Courier New', Courier, monospace; */
+    font-family: 'Consolas', 'Lucida Console', 'Courier New', monospace;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+header, footer {
+    background: #bcd0cd;
+    color: rgb(22, 50, 37);
+    text-align: center;
+    padding: 15px;
+}
+
+main {
+    padding: 1%;
+    min-height: 400px;
+}
+
+nav a {
+    color: rgb(35, 57, 58);
+    margin: 0 10px;             /* відступи між посиланнями */
+    text-decoration: none;      /* видалення підкреслення   */
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+h1, h2, h3 {
+    color: #333;
+    letter-spacing: 1px;
+}
+
+p {
+    text-indent: 30px;
+    word-spacing: 3px;
+}
+
+.highlight {
+    color: rgb(0, 73, 42);
+    font-weight: bold;
+}
+
+#special {
+    color: rgb(0, 121, 65);
+    text-transform: uppercase;
+}
+
+#bad {
+    color: rgb(92, 0, 40);
+}
+#good {
+    color: green;
+}
+
+ul {
+    list-style-type: square;
+    padding-left: 40px;
+}
+
+ol {
+    list-style-type: decimal;
+    padding-left: 40px;
+}
+
+dl {
+    margin-left: 20px;
+}
+
+dl dt {
+    font-weight: bold;
+    color: #0056b3;
+}
