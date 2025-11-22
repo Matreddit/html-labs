@@ -17,7 +17,8 @@ header, footer {
 }
 
 #gallery-DEs{
-    width: 450px;
+    width: 100%;
+    max-width: 450px;
 }
 
 #rounded-img{
@@ -124,6 +125,8 @@ dl dt {
 }
 
 
+
+
 /* lb4 */
 
 .block{
@@ -187,10 +190,19 @@ table.lb4-table {
 /* === clients === */
 
 table.clients{
+    /* width: 90%;
+    max-width: 1000px;
+    margin: 20px, 20px, 20px, auto;
+    border: #404545 2px solid;
+    border-collapse: collapse;
+    text-align: center;
+    background-color: #e6fffb;
+    border-radius: 10px; */
+
+
     width: 90%;
     max-width: 1000px;
-    margin: 20px auto; 
-    /* margin: 20px 40px; */
+    margin: 20px auto; /* fixed syntax */
     border: 2px solid #404545;
     /* allow radius to show */
     text-align: center;
@@ -227,10 +239,306 @@ table.clients a{
 table.clients a:hover{
     font-weight: bold;
 }
-
-/* align text in second column to the left */
 table.clients th:nth-child(2),
 table.clients td:nth-child(2) {
     text-align: left;
     padding-left: 20px; /* optional, for nicer spacing */
+}
+
+
+
+
+
+/* LAB 5, Flexbox. Adaptive design */
+/* === Lab 5: Example-like layout (header | [article | news] | footer) === */
+#main {
+  display: flex;
+  min-height: calc(100vh - 40vh);
+}
+
+#main > article {
+  flex: 1;
+  padding: 1em;
+  min-width: 0;
+}
+
+/* aside != news */
+#main > .news {
+  flex: 0 0 20vw;           /* quackit.com */
+  background: beige;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  min-width: 0;
+}
+
+.news h2 {
+  margin-top: 0;
+  text-align: center;
+}
+
+/* each news */
+.news > div {
+  background: #fff;
+  padding: 0.5em;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.news img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  max-height: 150px;   /* limit image height */
+  object-fit: cover;   /* crop if needed */
+}
+
+.news a {
+  display: inline-block;
+  margin-top: 0.25em;
+  font-size: 0.9em;
+  color: #003366;
+  text-decoration: none;
+}
+.news a:hover {
+  text-decoration: underline;
+}
+
+
+
+/* iPad mini ≤768px */
+@media (max-width: 768px){
+  /* keep two columns, just give the News a bit more room and tighten spacing */
+  #main { gap: 12px; }
+  #main > .news { flex: 0 0 30vw; }   /* was 20vw */
+  .news img { max-height: 120px; }    /* slightly smaller images */
+}
+
+/* iPhone XR ≤480px */
+@media (max-width: 480px){
+  #main { flex-direction: column; }
+
+  /* make both columns full width when stacked */
+  #main > article,
+  #main > .news {
+    flex: none;
+    min-width: 0;
+    max-width: 100%;
+    /* width: 100%; */
+  }
+
+  /* images a bit shorter on very small screens */
+  .news img { max-height: 110px; }
+}
+
+img, video {
+  max-width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* ================================================== */
+/* LAB 6, Grid. */
+
+.grid-3x3 {
+    max-width: 600px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+ /* (---)(--)(-)
+    (---)(--)(-)
+    (---)(--)(-) */
+    /* grid-template-columns: 2.5fr 2fr 1.5fr; */
+    /* grid-template-rows: repeat(3, 1fr); */
+    gap: 40px;
+}
+.grid-3x3 > div {
+    background-color: #e0f7fa;
+    padding: 10px;
+    border: 2px solid #00796b;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+
+    /* center image */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.grid-3x3 > div > a > img {
+    max-width: 100%;   /* don’t force it to stretch */
+    max-height: 100%;  /* keep it inside the cell */
+    height: auto;
+    /* display: block; */
+}
+.grid-3x3 > div > a > img:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+
+/* -------- */
+
+/* Grid  */
+.grid-7{
+    /* max-width: 800px; */
+
+    display: grid;
+    grid-template-columns: 3fr 2fr 1fr;  
+    grid-auto-rows: auto;
+    gap: 10px;
+    padding: 10px;
+}
+.grid-7 > div {
+    background-color: #e0f7fa;
+    padding: 10px;
+    border: 2px solid #00796b;
+    border-radius: 8px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* row 1 */
+#item1 { grid-area: 1 / 1 / 2 / 2; }
+#item2 { grid-area: 1 / 2 / 2 / 3; }
+#item3 { grid-area: 1 / 3 / 2 / 4; }
+
+/* row 2 */
+#item4 { grid-area: 2 / 1 / 3 / 2; }
+#item5 { grid-area: 2 / 2 / 3 / 4; }
+
+/* row 3 */
+#item6 { grid-area: 3 / 1 / 4 / 3; }
+#item7 { grid-area: 3 / 3 / 4 / 4; }
+
+.grid-7 h3 {
+    margin: 0;
+    font-size: 1rem;
+    color: #004d40;
+}
+.grid-7 p {
+    margin: 4px 0 0;
+    font-size: 0.75rem;
+    color: #00695c;
+    text-indent: 0px;
+}
+
+
+
+
+/* Gallery */
+
+.grid-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.grid-gallery > div {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+
+#gallery-item1 { grid-area: 1 / 1 / 3 / 3; }
+#gallery-item6 { grid-area: 3 / 2 / 5 / 4; }
+
+#gallery-item2 { grid-area: 1 / 3 / 2 / 4; }
+#gallery-item3 { grid-area: 2 / 3 / 3 / 4; }
+#gallery-item4 { grid-area: 3 / 1 / 4 / 2; }
+#gallery-item5 { grid-area: 4 / 1 / 5 / 2; }
+
+.grid-gallery img {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.4s ease;
+}
+
+.grid-gallery img:hover {
+    transform: scale(1.06);
+}
+
+
+
+
+/* contact form */
+
+.form-wrapper {
+    max-width: 500px;
+    margin: 20px auto;
+    background: #E0F7FA;
+    padding: 20px 40px 20px 20px;
+    border: 2px solid #ddd;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-wrapper form {
+    display: grid;
+    grid-template-columns: .2fr 1fr;
+    gap: 10px;
+}
+
+.form-wrapper label {
+    align-self: center;
+    font-size: 0.95rem;
+}
+
+.form-wrapper input,
+.form-wrapper select,
+.form-wrapper textarea {
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+
+    font: inherit;
+}
+.form-wrapper select{
+    width: 104%;
+    background-color: #ffffff;
+}
+
+.form-wrapper textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.buttons {
+    grid-column: 2;
+    text-align: right;
+    margin-top: 10px;
+}
+
+.buttons button {
+    padding: 8px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    font: inherit;
+}
+
+.buttons button[type="submit"] {
+    background: #007bff;
+    color: #fff;
+    margin-right: 8px;
+}
+
+.buttons button[type="reset"] {
+    background: #ff6b6b;
+    margin-right: -16px;
 }

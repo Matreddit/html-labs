@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Gallery</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            background: #111;
+            color: #fff;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px 10px;
+            margin: 0;
+        }
+
+        .gallery {
+            display: grid;
+            /* Responsive columns, minimum width ~250px */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 10px;
+            padding: 10px;
+            grid-auto-flow: dense; /* tries to fill gaps */
+        }
+
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 4px;
+            background: #000;
+        }
+
+        .gallery-item img {
+            display: block;
+            width: 100%;
+            height: auto;    /* keep original aspect ratio (16:9) */
+        }
+
+        /* Make some images wider by spanning 2 columns */
+        .item-large {
+            grid-column: span 2;
+        }
+
+        /* On narrow screens, cancel spanning (all same width) */
+        @media (max-width: 768px) {
+            .item-large {
+                grid-column: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Photo Gallery</h1>
+
+    <div class="gallery">
+        <figure class="gallery-item item-large">
+            <img src="images/cust-001-rice.jpeg" alt="Photo 1">
+        </figure>
+
+        <figure class="gallery-item">
+            <img src="images/cust-002.png" alt="Photo 2">
+        </figure>
+
+        <figure class="gallery-item">
+            <img src="images/cust-003.png" alt="Photo 3">
+        </figure>
+
+        <figure class="gallery-item item-large">
+            <img src="images/cust-004.png" alt="Photo 4">
+        </figure>
+
+        <figure class="gallery-item">
+            <img src="images/cust-005-kde-rice.webp" alt="Photo 5">
+        </figure>
+
+        <figure class="gallery-item">
+            <img src="images/cust-006-hyperland.png" alt="Photo 6">
+        </figure>
+    </div>
+</body>
+</html>
